@@ -78,4 +78,20 @@ object DataFramesBasics extends App {
 
   manualCarsDF.printSchema()
   manualCarsDFWithImplicits.printSchema() // Gives name to the columns
+
+  // Exercises
+  val smartphones = Seq(
+    ("OnePlus", "8T", 6.55, 48),
+    ("iPhone", "11", 6.1, 12),
+    ("Samsung", "Note 10", 6.3, 12)
+  )
+  val smartphonesDF = smartphones.toDF("Make", "Model", "Screen Dimensions", "Camera MP")
+  smartphonesDF.show()
+
+  val moviesDF = spark.read
+    .format("json")
+    .option("inferSchema", "true")
+    .load("src/main/resources/data/movies.json")
+  moviesDF.printSchema()
+  println(moviesDF.count())
 }
